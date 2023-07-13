@@ -10,7 +10,7 @@
 .image-main {
   position: relative;
 }
-.image-main.top {
+.image-main .top {
   position: absolute;
   top: 0;
   right: 0;

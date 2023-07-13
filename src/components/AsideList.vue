@@ -1,6 +1,7 @@
 <template>
   <div class="aside-list" :class="{ active: active }">
     <span class="truncate"><slot></slot></span>
+    <!-- truncate超出显示... -->
     <el-button
       class="ml-auto px-1"
       text
