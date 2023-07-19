@@ -23,8 +23,9 @@ const handleOpenCreate = () => ImageAsideRef.value.handleCreate()
 const windowHeight = window.innerHeight || document.body.clientHeight //拿到浏览器可视区域高度
 const h = windowHeight - 64 - 44 - 40 //padding有40
 const imageMainRef = ref(null)
-const handleAsideChange = (imageClassId) =>
-  imageMainRef.value.loadData(imageClassId)
+const handleAsideChange = (image_class_id) =>
+  imageMainRef.value.loadData(image_class_id)
+//点击按钮抽屉组件弹出
 const handleOpenUpload = () => {
   imageMainRef.value.openUploadFile()
 }

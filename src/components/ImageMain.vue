@@ -56,7 +56,7 @@
     </div>
   </el-main>
   <el-drawer v-model="drawer" title="上传图片"
-    ><UploadFile :data="{ imageClassId }" @success="handleUploadSuccess" />
+    ><UploadFile :data="{ image_class_id }" @success="handleUploadSuccess" />
   </el-drawer>
 </template>
 <script setup>
@@ -69,12 +69,13 @@ const drawer = ref(false)
 const openUploadFile = () => {
   drawer.value = true
 }
+//分页
 const currentPage = ref(1)
 const total = ref(0)
 const limit = ref(10)
 const list = ref([])
 const loading = ref(false)
-const imageClassId = ref(1)
+const image_class_id = ref(0)
 //获取数据
 function getData(p = null) {
   if (typeof p == 'number') {
@@ -82,7 +83,7 @@ function getData(p = null) {
   }
   console.log(111)
   loading.value = true
-  reqGetImageList(imageClassId.value, currentPage.value)
+  reqGetImageList(image_class_id.value, currentPage.value)
     .then((res) => {
       total.value = res.totalCount
       list.value = res.list
@@ -120,7 +121,7 @@ const handleDelete = (id) => {
 //根据分类id重新加载图片列表
 const loadData = (id) => {
   currentPage.value = 1
-  imageClassId.value = id
+  image_class_id.value = id
   getData()
 }
 //上传成功

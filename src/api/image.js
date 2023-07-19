@@ -9,4 +9,4 @@ export function reqDeleteImage(ids) {
   return axios.post(`/admin/image/delete_all`, { ids })
 }
 //上传图片
-export const reqUploadImageAction = 'api/admin/image/upload'
+export const reqUploadImageAction = '/api/admin/image/upload'

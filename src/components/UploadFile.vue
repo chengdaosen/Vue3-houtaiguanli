@@ -31,6 +31,7 @@ defineProps({
 const emit = defineEmits(['success'])
 //上传成功
 const uploadSuccess = (response, uploadFile, uploadFiles) => {
+  console.log(response)
   emit('success', {
     response,
     uploadFile,
