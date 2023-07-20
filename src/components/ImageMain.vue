@@ -81,7 +81,6 @@ function getData(p = null) {
   if (typeof p == 'number') {
     currentPage.value = p
   }
-  console.log(111)
   loading.value = true
   reqGetImageList(image_class_id.value, currentPage.value)
     .then((res) => {
