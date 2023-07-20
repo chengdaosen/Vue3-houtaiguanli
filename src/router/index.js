@@ -103,6 +103,14 @@ const asyncRoutes = [
       title: '优惠券列表',
     },
   },
+  {
+    path: '/manager/list',
+    name: '/manager/list',
+    component: () => import('@/pages/manager/list.vue'),
+    meta: {
+      title: '管理员',
+    },
+  },
 ]
 
 export const router = createRouter({
