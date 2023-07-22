@@ -22,11 +22,12 @@ export function getManagerList(page, query = {}) {
   let q = []
   for (const key in query) {
     if (query[key]) {
-      q.push(`${key} = ${encodeURIComponent(query[key])}`)
+      q.push(`${key}=${query[key]}`)
     }
   }
   let r = q.join('&')
   r = r ? '?' + r : ''
+  console.log(`/admin/manager/${page}${r}`)
   return axios.get(`/admin/manager/${page}${r}`)
 }
 export function updateManagerStatus(id, status) {
@@ -34,7 +35,6 @@ export function updateManagerStatus(id, status) {
     status,
   })
 }
-
 export function createManager(data) {
   return axios.post(`/admin/manager`, data)
 }
