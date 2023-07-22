@@ -27,7 +27,7 @@ export function getManagerList(page, query = {}) {
   }
   let r = q.join('&')
   r = r ? '?' + r : ''
-  console.log(`/admin/manager/${page}${r}`)
+
   return axios.get(`/admin/manager/${page}${r}`)
 }
 export function updateManagerStatus(id, status) {

@@ -79,6 +79,7 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import FormDrawer from '@/components/FormDrawer.vue'
+import { useInitTable } from '@/composables/useCommon.js'
 import {
   getNoticeList,
   createNotice,
@@ -86,34 +87,11 @@ import {
   deleteNotice,
 } from '@/api/notice'
 import { toast } from '@/composables/util'
-
-const tableData = ref([])
-const loading = ref(false)
-
-// 分页
-const currentPage = ref(1)
-const total = ref(0)
-const limit = ref(10)
-
-// 获取数据
-function getData(p = null) {
-  if (typeof p == 'number') {
-    currentPage.value = p
+const { tableData, loading, currentPage, total, limit, getData } = useInitTable(
+  {
+    getList: getNoticeList,
   }
-
-  loading.value = true
-  getNoticeList(currentPage.value)
-    .then((res) => {
-      tableData.value = res.list
-      total.value = res.totalCount
-    })
-    .finally(() => {
-      loading.value = false
-    })
-}
-
-getData()
-
+)
 // 删除
 const handleDelete = (id) => {
   loading.value = true
