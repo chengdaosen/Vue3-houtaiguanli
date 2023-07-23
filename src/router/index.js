@@ -108,7 +108,15 @@ const asyncRoutes = [
     name: '/manager/list',
     component: () => import('@/pages/manager/list.vue'),
     meta: {
-      title: '管理员',
+      title: '管理员管理',
+    },
+  },
+  {
+    path: '/access/list',
+    name: '/access/list',
+    component: () => import('@/pages/access/list.vue'),
+    meta: {
+      title: '菜单权限管理',
     },
   },
 ]
