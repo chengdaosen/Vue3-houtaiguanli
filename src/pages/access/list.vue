@@ -74,7 +74,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item label="菜单图标" prop="icon" v-if="form.menu == 1">
-          <el-input v-model="form.icon"></el-input>
+          <IconSelect v-model="form.icon" />
         </el-form-item>
         <el-form-item
           label="前端路由"
@@ -111,6 +111,7 @@
 import { ref } from 'vue'
 import ListHeader from '@/components/ListHeader.vue'
 import FormDrawer from '@/components/FormDrawer.vue'
+import IconSelect from '@/components/IconSelect.vue'
 import { getRuleList, createRule, updateRule } from '@/api/rule.js'
 
 import { useInitTable, useInitForm } from '@/composables/useCommon.js'
