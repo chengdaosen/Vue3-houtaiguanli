@@ -1,5 +1,5 @@
 import axios from '@/axios'
-
+import { queryParams } from '@/composables/util'
 export function reqLogin(username, password) {
   return axios.post('/admin/login', {
     username,
@@ -19,15 +19,7 @@ export function reqUpdatePassword(data) {
   return axios.post('/admin/updatepassword', data)
 }
 export function getManagerList(page, query = {}) {
-  let q = []
-  for (const key in query) {
-    if (query[key]) {
-      q.push(`${key}=${query[key]}`)
-    }
-  }
-  let r = q.join('&')
-  r = r ? '?' + r : ''
-
+  let r = queryParams(query)
   return axios.get(`/admin/manager/${page}${r}`)
 }
 export function updateManagerStatus(id, status) {
