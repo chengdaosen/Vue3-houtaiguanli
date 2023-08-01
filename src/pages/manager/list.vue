@@ -1,27 +1,19 @@
 <template>
   <el-card shadow="never" class="border-0">
     <!-- 搜索 -->
-    <el-form :model="searchForm" label-width="80px" class="mb-3" size="small">
-      <el-row :gutter="20">
-        <el-col :span="8" :offset="0">
-          <el-form-item label="关键词">
-            <el-input
-              v-model="searchForm.keyword"
-              placeholder="管理员昵称"
-              clearable
-            ></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="8" :offset="8">
-          <div class="flex items-center justify-end">
-            <el-button type="primary" @click="getData">搜索</el-button>
-            <el-button @click="resetSearchForm">重置</el-button>
-          </div>
-        </el-col>
-      </el-row>
-    </el-form>
-    <!-- 新增，刷新 -->
+    <Search :model="searchForm" @search="getData" @reset="resetSearchForm">
+      <SearchItem label="关键词">
+        <el-input
+          v-model="searchForm.keyword"
+          placeholder="管理员昵称"
+          clearable
+        ></el-input>
+      </SearchItem>
+    </Search>
+
+    <!-- 新增|刷新 -->
     <ListHeader @create="handleCreate" @refresh="getData" />
+
     <el-table :data="tableData" stripe style="width: 100%" v-loading="loading">
       <el-table-column label="管理员" width="200">
         <template #default="{ row }">
@@ -138,9 +130,12 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import ListHeader from '@/components/ListHeader.vue'
 import FormDrawer from '@/components/FormDrawer.vue'
 import ChooseImage from '@/components/ChooseImage.vue'
-import ListHeader from '@/components/ListHeader.vue'
+import Search from '@/components/Search.vue'
+import SearchItem from '@/components/SearchItem.vue'
+
 import {
   getManagerList,
   updateManagerStatus,
@@ -150,7 +145,9 @@ import {
 } from '@/api/manager'
 
 import { useInitTable, useInitForm } from '@/composables/useCommon.js'
+
 const roles = ref([])
+
 const {
   searchForm,
   resetSearchForm,
@@ -160,6 +157,8 @@ const {
   total,
   limit,
   getData,
+  handleDelete,
+  handleStatusChange,
 } = useInitTable({
   searchForm: {
     keyword: '',
@@ -173,7 +172,10 @@ const {
     total.value = res.totalCount
     roles.value = res.roles
   },
+  delete: deleteManager,
+  updateStatus: updateManagerStatus,
 })
+
 const {
   formDrawerRef,
   formRef,
@@ -183,14 +185,16 @@ const {
   handleSubmit,
   handleCreate,
   handleEdit,
-  handleStatusChange,
-  handleDelete,
 } = useInitForm({
-  form: { username: '', password: '', role_id: null, status: 1, avatar: '' },
+  form: {
+    username: '',
+    password: '',
+    role_id: null,
+    status: 1,
+    avatar: '',
+  },
   getData,
   update: updateManager,
   create: createManager,
-  delete: deleteManager,
-  updateStatus: updateManagerStatus,
 })
 </script>
